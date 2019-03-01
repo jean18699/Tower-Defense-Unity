@@ -6,9 +6,18 @@ using System.Diagnostics;
 public class ControlFlecha : MonoBehaviour
 {
     Global scrGlobales;
-	public float Gravity = -1;
-	float Velocidad = 1;
+	public float Gravity = -9.8f;
+	float Velocidad = 15;
 	public Vector3 mousePos;
+	float duracionDeVuelo;
+	float angulo;
+	float Vx;
+	float VoY;
+
+	float Xo;
+	float Yo;
+
+	float elapse_time;
 
 	float X;
 	float Y;
@@ -17,6 +26,13 @@ public class ControlFlecha : MonoBehaviour
 	void Start()
     {
 		//UnityEngine.Debug.Log(mousePos.x + " " + mousePos.y);
+		angulo = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+		Vx = Velocidad * Mathf.Cos(angulo);
+		VoY = Velocidad * Mathf.Sin(angulo);
+		duracionDeVuelo = Mathf.Abs(transform.parent.position.x / Vx);
+
+		Xo = transform.position.x;
+		Yo = transform.position.y;
 	}
 
     // Update is called once per frame
@@ -26,41 +42,39 @@ public class ControlFlecha : MonoBehaviour
 		/*float Xo = transform.parent.position.x;
 		float Yo = transform.parent.position.y;*/
 
-		float Xo = transform.position.x;
-		float Yo = transform.position.y;
+		
 
-		var angulo = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+		
 
-		float Vx = Velocidad * Mathf.Cos(angulo);
-		float VoY = Velocidad * Mathf.Sin(angulo);
+
 		float Vy;
 
-		//float duracionDeVuelo = Mathf.Abs(transform.parent.position.x / Vx);
-
-
-		float elapse_time = 0;
-
+		
 		transform.SetParent(null);
+
+		print(angulo);
 
 		Stopwatch stopWatch = new Stopwatch();
 		stopWatch.Start();
 
-		if (transform.position.y > -30)
+		if (Time.deltaTime < duracionDeVuelo)
 		{
 			//Projectile.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
 
 			//vy=v0y−g⋅t
 
-			//elapse_time += stopWatch.ElapsedMilliseconds / 1000;
+			elapse_time += Time.deltaTime;
 
 			Vy = VoY - Gravity * Time.deltaTime;
 
-			X = Xo + Vx + Time.deltaTime;
-			Y = Yo + Vy - (Gravity / 2) * Mathf.Pow(Time.deltaTime, 2);
+			X = Xo + Vx * elapse_time;
+			Y = Yo + VoY - (Gravity / 2) * Mathf.Pow(elapse_time, 2);
 
 			transform.position = new Vector2(X, Y);
 
-			UnityEngine.Debug.Log(Y);
+			//transform.Translate(Xo + Vx * elapse_time, (VoY - (Gravity * elapse_time)) * Time.deltaTime, 0);
+
+			UnityEngine.Debug.Log(Xo);
 
 		}
 	}
