@@ -6,8 +6,8 @@ using System.Diagnostics;
 public class ControlFlecha : MonoBehaviour
 {
     Global scrGlobales;
-	public float Gravity = 9.8f;
-	float Velocidad = 5;
+	public float Gravity = -1;
+	float Velocidad = 1;
 	public Vector3 mousePos;
 
 	float X;
@@ -16,14 +16,18 @@ public class ControlFlecha : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        scrGlobales = GameObject.Find("ScriptsGlobales").GetComponent<Global>();
-    }
+		//UnityEngine.Debug.Log(mousePos.x + " " + mousePos.y);
+	}
 
     // Update is called once per frame
     void Update()
     {
-		float Xo = transform.parent.position.x;
-		float Yo = transform.parent.position.y;
+
+		/*float Xo = transform.parent.position.x;
+		float Yo = transform.parent.position.y;*/
+
+		float Xo = transform.position.x;
+		float Yo = transform.position.y;
 
 		var angulo = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 
@@ -31,7 +35,7 @@ public class ControlFlecha : MonoBehaviour
 		float VoY = Velocidad * Mathf.Sin(angulo);
 		float Vy;
 
-		float duracionDeVuelo = Mathf.Abs(transform.parent.position.x / Vx);
+		//float duracionDeVuelo = Mathf.Abs(transform.parent.position.x / Vx);
 
 
 		float elapse_time = 0;
@@ -41,22 +45,22 @@ public class ControlFlecha : MonoBehaviour
 		Stopwatch stopWatch = new Stopwatch();
 		stopWatch.Start();
 
-		if (transform.position.y > 0)
+		if (transform.position.y > -30)
 		{
 			//Projectile.Translate(0, (Vy - (gravity * elapse_time)) * Time.deltaTime, Vx * Time.deltaTime);
 
 			//vy=v0y−g⋅t
 
-			elapse_time = stopWatch.ElapsedMilliseconds / 1000;
+			//elapse_time += stopWatch.ElapsedMilliseconds / 1000;
 
-			Vy = VoY - Gravity * elapse_time;
+			Vy = VoY - Gravity * Time.deltaTime;
 
-			X = Xo + Vx + elapse_time;
-			Y = Yo + Vy * elapse_time + (Gravity / 2) * Mathf.Pow(elapse_time, 2);
+			X = Xo + Vx + Time.deltaTime;
+			Y = Yo + Vy - (Gravity / 2) * Mathf.Pow(Time.deltaTime, 2);
 
 			transform.position = new Vector2(X, Y);
 
-			UnityEngine.Debug.Log(X);
+			UnityEngine.Debug.Log(Y);
 
 		}
 	}

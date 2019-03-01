@@ -8,20 +8,18 @@ public class ControlArco : MonoBehaviour
 
     Vector2 mousePos;
 	Vector3 screenPos;
-	public Sprite Flecha;
-	Sprite flecha;
+	public GameObject Flecha;
+	GameObject _flecha;
     
     void Start()
     {
-		flecha = Instantiate(Flecha, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, -45));
-    }
+
+	}
 
     // Update is called once per frame
     void Update()
     {
-
         rotar();
-
     }
 
 
@@ -51,12 +49,19 @@ public class ControlArco : MonoBehaviour
 
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-		if (Input.GetButton("Fire1"))
+		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			
-			var arco = GameObject.Find("Arco").GetComponent<ControlFlecha>();
-			var flecha = arco.transform.GetChild(0);
-			//flecha.transform.gameObject.AddComponent<Scri>
+			_flecha = Instantiate(Flecha);
+			//var _flechaScript = GameObject.FindGameObjectWithTag("Flecha").GetComponent<ControlFlecha>();
+			//_flechaScript.mousePos = mousePos;
+			var _flechaScript = _flecha.GetComponent<ControlFlecha>();
+			_flechaScript.mousePos = mousePos;
+			_flecha.transform.position = new Vector2(0, 0);
+			_flecha.transform.SetParent(gameObject.transform);
+			_flecha.transform.localPosition = new Vector2(0, 0);
+			//_flecha.transform.SetParent(null);
+
+			//_flecha.transform.SetParent(null);
 		}
 
 	}
