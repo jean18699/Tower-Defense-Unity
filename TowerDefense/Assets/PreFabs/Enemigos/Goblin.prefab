@@ -183,11 +183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7443722976874571748}
     m_Modifications:
-    - target: {fileID: 7330200024282272077, guid: 980d31cf981cc3c46bcacc0114e5932b,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
-      objectReference: {fileID: 0}
     - target: {fileID: 8840492274873735698, guid: 980d31cf981cc3c46bcacc0114e5932b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -242,6 +237,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840492274873735698, guid: 980d31cf981cc3c46bcacc0114e5932b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 7330200024282272077, guid: 980d31cf981cc3c46bcacc0114e5932b,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 241674482216021632, guid: 980d31cf981cc3c46bcacc0114e5932b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.93
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2133044034510445268, guid: 980d31cf981cc3c46bcacc0114e5932b, type: 3}

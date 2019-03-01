@@ -27,7 +27,7 @@ public class GeneradorEnemigos : MonoBehaviour
             {
 
                 _enemigo = Instantiate(enemigosPrefab);
-                _enemigo.GetComponent<ControlEnemigo>().cantVida = 0.9f;
+                _enemigo.GetComponent<ControlEnemigo>().nivel = 1;
                 _enemigo.transform.position = new Vector3(_enemigo.transform.position.x, -9f, 0);
                 tiempoAparicion = 0;
 
@@ -40,7 +40,7 @@ public class GeneradorEnemigos : MonoBehaviour
                 {
 
                     _enemigo = Instantiate(enemigosPrefab);
-                    _enemigo.GetComponent<ControlEnemigo>().cantVida = 0.9f;
+                    _enemigo.GetComponent<ControlEnemigo>().nivel = 2;
                     _enemigo.transform.position = new Vector3(_enemigo.transform.position.x, -9f, 0);
                     tiempoAparicion = 0;
 

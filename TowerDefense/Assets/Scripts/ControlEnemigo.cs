@@ -8,7 +8,8 @@ public class ControlEnemigo : MonoBehaviour
     public float velocidadMovimiento;
 
     //VIDA DEL ENEMIGO Y LONGITUD DE LA BARRA
-    public float cantVida;
+    public float nivel; //Por nivel
+    float cantVida;
     GameObject healthBar;
     GameObject _vida;
 
@@ -18,11 +19,16 @@ public class ControlEnemigo : MonoBehaviour
 
     void Start()
     {
-        Enemigo = transform.gameObject.GetComponent<Animator>();
+        cantVida = nivel;
 
+        Enemigo = transform.gameObject.GetComponent<Animator>();
         healthBar = transform.GetChild(0).gameObject;
         healthBar.transform.localScale = new Vector3(cantVida, 1, 1);
+
         _vida = healthBar.transform.GetChild(2).gameObject;
+       
+
+        
 
     }
 
