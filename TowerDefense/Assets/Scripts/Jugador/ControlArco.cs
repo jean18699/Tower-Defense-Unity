@@ -54,7 +54,7 @@ public class ControlArco : MonoBehaviour
 			_flecha = Instantiate(Flecha);
 			//var _flechaScript = GameObject.FindGameObjectWithTag("Flecha").GetComponent<ControlFlecha>();
 			//_flechaScript.mousePos = mousePos;
-			var _flechaScript = _flecha.GetComponent<ControlFlecha>();
+			var _flechaScript = _flecha.GetComponent<TiroFlecha>();
 			_flechaScript.mousePos = mousePos;
 			_flecha.transform.position = new Vector2(0, 0);
 			_flecha.transform.SetParent(gameObject.transform);

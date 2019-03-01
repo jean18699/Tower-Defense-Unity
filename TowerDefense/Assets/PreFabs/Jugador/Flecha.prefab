@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5578627373012585175}
   - component: {fileID: 6209107190799707993}
   - component: {fileID: 3029731798288444585}
+  - component: {fileID: 1452274405289184505}
   - component: {fileID: 1738111501231096897}
   m_Layer: 0
   m_Name: Flecha
@@ -88,12 +89,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185850500111874466}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e81a007112718084fb10379f89bd3f1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Gravity: 9.8
+  mousePos: {x: 0, y: 0, z: 0}
+--- !u!114 &1452274405289184505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185850500111874466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c666f346c4eb53e42822ad619ecb8600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VelocidadInicial: 0.1
   mousePos: {x: 0, y: 0, z: 0}
 --- !u!54 &1738111501231096897
 Rigidbody:
