@@ -7,6 +7,8 @@ public class TiroFlecha : MonoBehaviour
 
     Vector3 cambioPosicion = Vector3.zero;
     Vector3 velocidadFinal = Vector3.zero;
+    float velocidad;
+    float angulo;
     // Start is called before the first frame update
     void Start()
     {

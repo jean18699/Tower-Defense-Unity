@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6209107190799707993}
   - component: {fileID: 3029731798288444585}
   - component: {fileID: 1738111501231096897}
+  - component: {fileID: 1171276122094668247}
   m_Layer: 0
   m_Name: Flecha
   m_TagString: Flecha
@@ -111,3 +112,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1171276122094668247
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185850500111874466}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.9916666, y: 2.9916666, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
