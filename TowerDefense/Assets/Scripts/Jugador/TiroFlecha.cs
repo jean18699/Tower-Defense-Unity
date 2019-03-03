@@ -32,17 +32,18 @@ public class TiroFlecha : MonoBehaviour
         velYInicial -= Time.deltaTime;
        // velXInicial += Time.deltaTime;
 
-        cambioPosicion.x = velXInicial + (Physics.gravity.x * Mathf.Pow(Time.deltaTime, 2)) / 2;
+        cambioPosicion.x = velXInicial + (Physics.gravity.x * (Mathf.Pow(Time.deltaTime, 2) / 2));
         print("x: " + cambioPosicion.x);
 
-        cambioPosicion.y += velYInicial + (Physics.gravity.y * Mathf.Pow(Time.deltaTime, 2)) / 2;
+        cambioPosicion.y = velYInicial + (Physics.gravity.y * (Mathf.Pow(Time.deltaTime, 2) / 2));
         print("y: " + cambioPosicion.y);
+
         //cambioPosicion.x = velocidadFinal.x * Time.deltaTime + (Physics.gravity.x * (Mathf.Pow(Time.deltaTime, 2f) / 2));
 
         //cambioPosicion.y = velocidadFinal.y * Time.deltaTime + (Physics.gravity.y * (Mathf.Pow(Time.deltaTime, 2f) / 2));
 
         //transform.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(velXInicial, velYInicial);
-        gameObject.transform.Translate(new Vector3(0,velYInicial));
+        gameObject.transform.Translate(cambioPosicion);
 
         //velocidadFinal += Physics.gravity * Time.deltaTime;
         transform.SetParent(null);

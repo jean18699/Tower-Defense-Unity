@@ -7,7 +7,7 @@ public class ControlFlecha : MonoBehaviour
 {
     Global scrGlobales;
 	public float Gravity = -9.8f;
-	float Velocidad = 15;
+	float Velocidad = 20;
 	public Vector3 mousePos;
 	float duracionDeVuelo;
 	float angulo;
@@ -22,17 +22,23 @@ public class ControlFlecha : MonoBehaviour
 	float X;
 	float Y;
 
+	float yAnterior;
+	float xAnterior;
+	float anguloRotacion;
+
 	// Start is called before the first frame update
 	void Start()
     {
-		//UnityEngine.Debug.Log(mousePos.x + " " + mousePos.y);
-		angulo = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        //UnityEngine.Debug.Log(mousePos.x + " " + mousePos.y);
+
+        
+        angulo = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 		Vx = Velocidad * Mathf.Cos(angulo);
 		VoY = Velocidad * Mathf.Sin(angulo);
 		duracionDeVuelo = Mathf.Abs(transform.parent.position.x / Vx);
 
-		Xo = transform.position.x;
-		Yo = transform.position.y;
+		Xo = transform.parent.position.x;
+		Yo = transform.parent.position.y + transform.parent.localScale.y;
 	}
 
     // Update is called once per frame
@@ -52,8 +58,6 @@ public class ControlFlecha : MonoBehaviour
 		
 		transform.SetParent(null);
 
-		print(angulo);
-
 		Stopwatch stopWatch = new Stopwatch();
 		stopWatch.Start();
 
@@ -65,16 +69,30 @@ public class ControlFlecha : MonoBehaviour
 
 			elapse_time += Time.deltaTime;
 
-			Vy = VoY - Gravity * Time.deltaTime;
+			
+
+			Vy = VoY - Gravity * elapse_time;
 
 			X = Xo + Vx * elapse_time;
 			Y = Yo + VoY - (Gravity / 2) * Mathf.Pow(elapse_time, 2);
 
+			
+			
+			transform.localRotation = Quaternion.Euler(0, 0, (yAnterior + Y));
+			//print(yAnterior + " " + Y);
+			yAnterior = Y;
+			xAnterior = X;
+
+			float xTriangulo = xAnterior - X;
+			float yTriangulo = yAnterior - Y;
+			anguloRotacion = Mathf.Atan2(xTriangulo, yTriangulo) * Mathf.Rad2Deg;
+			print(xAnterior + " " + X);
+
+
 			transform.position = new Vector2(X, Y);
+			
 
 			//transform.Translate(Xo + Vx * elapse_time, (VoY - (Gravity * elapse_time)) * Time.deltaTime, 0);
-
-			UnityEngine.Debug.Log(Xo);
 
 		}
 	}

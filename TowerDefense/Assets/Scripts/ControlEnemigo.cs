@@ -12,6 +12,8 @@ public class ControlEnemigo : MonoBehaviour
     float cantVida;
     GameObject healthBar;
     GameObject _vida;
+    float tiempoMuerte;
+
 
     //Para controlar las animaciones:
     Animator Enemigo;
@@ -41,18 +43,16 @@ public class ControlEnemigo : MonoBehaviour
                 Moverse();
             }
 
-        }
+       }
         else
         {
-            Atacar();
+            if (Enemigo.GetBool("Morir") == false)
+            {
+                Atacar();
+            }
+            
         }
 
-
-        if (Input.GetButton("Fire1"))
-        {
-            danoCuerpo(true);
-        }
-        
 
     }
 
@@ -71,7 +71,20 @@ public class ControlEnemigo : MonoBehaviour
 
     void Morir()
     {
+        StartCoroutine(AnimacionMorir());
+        
+    }
+
+    #endregion
+
+    #region CORRUTINAS
+
+    IEnumerator AnimacionMorir()
+    {
         Enemigo.SetBool("Morir", true);
+        yield return new WaitForSeconds(3f);
+        Destroy(transform.gameObject);
+        yield return 0;
     }
 
     #endregion
@@ -85,20 +98,23 @@ public class ControlEnemigo : MonoBehaviour
         if (headShot == true)
         {
             Morir();
-            _vida.transform.localScale -= new Vector3(0, 0, 0);
+
 
         }
     }
 
 
-    public void danoCuerpo(bool golpe = false)
+    public void danoCuerpo(bool golpe = false,float dmgFlecha = 0)
     {
         if (golpe == true)
         {
-            if (_vida.transform.localScale.x > 0.15f)
+            _vida.transform.localScale -= new Vector3(dmgFlecha, 0,0);
+           
+            if(_vida.transform.localScale.x < 0)
             {
-                _vida.transform.localScale -= new Vector3(0.2f, _vida.transform.localPosition.y);
+                Morir();
             }
+
         }
     }
 
