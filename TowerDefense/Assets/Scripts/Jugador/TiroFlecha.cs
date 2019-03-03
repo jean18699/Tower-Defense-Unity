@@ -7,22 +7,39 @@ public class TiroFlecha : MonoBehaviour
 
     Vector3 cambioPosicion = Vector3.zero;
     Vector3 velocidadFinal = Vector3.zero;
+    public float velocidad;
+    float velXInicial;
+    float velYInicial;
+    float angulo;
+    Global scrGlobales;
+    
     // Start is called before the first frame update
     void Start()
     {
+        scrGlobales = GameObject.Find("ScriptsGlobales").GetComponent<Global>();
+        velXInicial = velocidad * Mathf.Cos(angulo);
 
+        velYInicial = velocidad * Mathf.Sin(angulo);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        cambioPosicion.x = velocidadFinal.x * Time.deltaTime + (Physics.gravity.x * (Mathf.Pow(Time.deltaTime, 2f) / 2));
+        /*if (scrGlobales.EstadoJugador == Global.eEstadoJugador.Disparo)
+        {
+        
+        }*/
 
-        cambioPosicion.y = velocidadFinal.y * Time.deltaTime + (Physics.gravity.y * (Mathf.Pow(Time.deltaTime, 2f) / 2));
+    }
 
-        gameObject.transform.Translate(cambioPosicion);
+    private void OnTriggerEnter(Collider other)
+    {
+        scrGlobales.EstadoJugador = Global.eEstadoJugador.Preparando;
+    }
 
-        velocidadFinal += Physics.gravity * Time.deltaTime;
+    public void asignarAngulo(float angulo)
+    {
+        this.angulo = angulo;
     }
 }
