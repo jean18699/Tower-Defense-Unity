@@ -35,7 +35,7 @@ public class TiroFlecha : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        scrGlobales.EstadoJugador = Global.eEstadoJugador.Preparando;
+       // scrGlobales.EstadoJugador = Global.eEstadoJugador.Preparando;
     }
 
     public void asignarAngulo(float angulo)
