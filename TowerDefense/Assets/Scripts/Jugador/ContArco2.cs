@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlArco : MonoBehaviour
+public class ContArco2 : MonoBehaviour
 {
     // Start is called before the first frame update
 
     Vector3 mousePos;
-    Vector3 screenPos;
     public GameObject Flecha;
     GameObject _flecha;
+    Global scrGlobales;
+    TiroFlecha controlFlecha;
+    public float angulo { get; set; }
+
 
     void Start()
     {
+        scrGlobales = GameObject.Find("ScriptsGlobales").GetComponent<Global>();
+        controlFlecha = GameObject.FindGameObjectWithTag("Flecha").GetComponent<TiroFlecha>();
 
     }
 
@@ -20,9 +25,31 @@ public class ControlArco : MonoBehaviour
     void Update()
     {
         rotar();
+        if(scrGlobales.EstadoJugador == Global.eEstadoJugador.Preparando)
+        {
+            prepararFlecha();
+            scrGlobales.EstadoJugador = Global.eEstadoJugador.Esperando;
+        }
+        if (Input.GetButton("Fire1"))
+        {
+
+           
+            
+        }
+        
+
     }
 
 
+    void prepararFlecha()
+    {
+        _flecha = Instantiate(Flecha);
+        _flecha.transform.SetParent(transform);
+        _flecha.transform.localPosition = new Vector3(0f,mousePos.y);
+        
+
+
+    }
 
     void rotar()
     {
@@ -30,13 +57,8 @@ public class ControlArco : MonoBehaviour
         mousePos = Input.mousePosition;
         mousePos.z = -10;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        //mousePos = new Vector3(Input.mousePosition.x - gameObject.transform.position.x, Input.mousePosition.y,10);
+        
 
-        //mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-        /*mousePos.x -= gameObject.transform.position.x;
-		mousePos.y -= gameObject.transform.position.y;
-        */
         if (mousePos.x <= 4.45f)
         {
             mousePos.x = 4.45f;
@@ -54,27 +76,9 @@ public class ControlArco : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        if (Input.GetButton("Fire1"))
-        {
-            _flecha = 5;
-            _flecha = Instantiate(Flecha);
-            _flecha.transform.SetParent(transform);
-            _flecha.transform.localPosition = Vector3.zero;
-            /*
-			_flecha = Instantiate(Flecha);
-			//var _flechaScript = GameObject.FindGameObjectWithTag("Flecha").GetComponent<ControlFlecha>();
-			//_flechaScript.mousePos = mousePos;
-			var _flechaScript = _flecha.GetComponent<ControlFlecha>();
-			_flechaScript.mousePos = mousePos;
-			_flecha.transform.position = new Vector2(0, 0);
-			//_flecha.transform.SetParent(gameObject.transform);
-			_flecha.transform.localPosition = new Vector2(0, 0);
-			//_flecha.transform.SetParent(null);
+        controlFlecha.asignarAngulo(angle);
 
-			//_flecha.transform.SetParent(null);
-		*/
-        }
-
+        
     }
 
 }

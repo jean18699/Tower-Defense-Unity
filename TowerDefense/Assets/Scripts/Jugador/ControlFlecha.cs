@@ -29,8 +29,10 @@ public class ControlFlecha : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		//UnityEngine.Debug.Log(mousePos.x + " " + mousePos.y);
-		angulo = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+        //UnityEngine.Debug.Log(mousePos.x + " " + mousePos.y);
+
+        
+        angulo = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 		Vx = Velocidad * Mathf.Cos(angulo);
 		VoY = Velocidad * Mathf.Sin(angulo);
 		duracionDeVuelo = Mathf.Abs(transform.parent.position.x / Vx);

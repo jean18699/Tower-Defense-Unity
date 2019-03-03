@@ -9,6 +9,7 @@ public class Global : MonoBehaviour
     public enum eEstadoJugador
     {
         Preparando,
+        Esperando,
         Disparo
         
     }
