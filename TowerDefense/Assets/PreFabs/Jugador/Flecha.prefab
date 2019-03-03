@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f107e9d9f6c8f4da645975f7df775d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocidad: 0.1
+  Velocidad: 350
   angle: 0
   posInicial: {x: 0, y: 0, z: 0}
 --- !u!54 &1738111501231096897
@@ -154,4 +154,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c666f346c4eb53e42822ad619ecb8600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 3
+  velocidad: 90
