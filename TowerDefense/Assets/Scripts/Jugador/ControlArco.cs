@@ -26,7 +26,7 @@ public class ControlArco : MonoBehaviour
 
     void rotar()
     {
-		mousePos = new Vector2(Input.mousePosition.x - gameObject.transform.position.x, Input.mousePosition.y);
+		mousePos = new Vector2(Input.mousePosition.x - gameObject.transform.position.x, Input.mousePosition.y); /// Intentar no  restar la pos del arco ahi para ver que pasa
 		mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
 		mousePos.x -= gameObject.transform.position.x;

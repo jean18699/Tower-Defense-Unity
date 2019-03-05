@@ -6,7 +6,7 @@ using System;
 
 public class ControlFlecha : MonoBehaviour
 {
-	public float Velocidad = 30;
+	public float Velocidad = 0.2f;
 	float velocidadX;
 	float velocidadY;
 	float velocidadInicialX;
@@ -15,7 +15,7 @@ public class ControlFlecha : MonoBehaviour
 	public float angulo;
 	public Vector3 PosicionFlecha;
 	Vector3 _posicionFlechaInicial;
-	float gravedad = 30;
+	float gravedad = 9.8f;
 
 	float elapsed_time;
 
@@ -40,15 +40,15 @@ public class ControlFlecha : MonoBehaviour
 		//velocidadInicialX = Mathf.Abs(Velocidad * Mathf.Ceil(Mathf.Cos(angulo)));
 		//velocidadInicialY = Velocidad * Mathf.Ceil(Mathf.Sin(angulo));
 
-		velocidadInicialX = Velocidad * Mathf.Abs(Mathf.Floor(Mathf.Cos(angulo * Mathf.Deg2Rad)));
-		velocidadInicialY = Velocidad * Mathf.Ceil(Mathf.Sin(angulo * Mathf.Deg2Rad));
+		velocidadInicialX = Velocidad * (Mathf.Cos(angulo * Mathf.Deg2Rad));
+		velocidadInicialY = Velocidad * Mathf.Sin(angulo * Mathf.Deg2Rad);
 	}
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
 
-		//velocidadX = velocidadInicialX;
+		//velocidadX = velocidadInicialX * Time.time;
 		velocidadY = velocidadInicialY - (gravedad * Time.time);
 
 		/*PosicionFlecha.x = _posicionFlechaInicial.x +  velocidadX * Time.time;
@@ -57,15 +57,17 @@ public class ControlFlecha : MonoBehaviour
 
 		print(velocidadY);*/
 
-		PosicionFlecha.x = -(_posicionFlechaInicial.x + (velocidadInicialX * Time.time));
-		PosicionFlecha.y = _posicionFlechaInicial.y + (velocidadInicialY * Time.time) - ((gravedad / 2) * Mathf.Pow(Time.time, 2));
+		PosicionFlecha.x = (_posicionFlechaInicial.x + (velocidadInicialX * Time.time))/1000;
+		//print(PosicionFlecha.x);
+		PosicionFlecha.y = _posicionFlechaInicial.y + (velocidadInicialY * Time.time) - ((gravedad / 2) * Mathf.Pow(Time.time, 2))*3;
 
-		transform.Translate(PosicionFlecha / 50);
+		//transform.Translate(PosicionFlecha);
+
+		transform.position = Vector2.MoveTowards(transform.position, PosicionFlecha, Velocidad * Time.deltaTime);
 
 		transform.localRotation = Quaternion.Euler(new Vector3(0, 0, velocidadY));
 
-		print(velocidadInicialY);
-
+		print(transform.position.x);
 	}
 
 	public double ConvertToRadians(float angle)
